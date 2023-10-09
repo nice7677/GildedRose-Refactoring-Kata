@@ -10,7 +10,6 @@ public class UpdateQualityManger {
     static {
         updateQualities.add(new AgedBireUpdateQuality());
         updateQualities.add(new BackstagePassesUpdateQuality());
-        updateQualities.add(new DefaultUpdateQuality());
     }
 
     public Set<UpdateQuality> getUpdateQualities() {

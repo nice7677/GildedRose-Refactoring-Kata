@@ -6,6 +6,13 @@ public class DefaultUpdateQuality implements UpdateQuality {
 
     private static final String CONJURED = "Conjured";
 
+    public static DefaultUpdateQuality of() {
+        return new DefaultUpdateQuality();
+    }
+
+    public DefaultUpdateQuality() {
+    }
+
     @Override
     public boolean supportTarget(String itemName) {
         return false;

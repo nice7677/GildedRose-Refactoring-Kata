@@ -17,7 +17,7 @@ public class UpdateQualityProcessor {
         updateQualities.stream()
             .filter(updateQuality -> updateQuality.supportTarget(item.name))
             .findFirst()
-            .orElse(new DefaultUpdateQuality())
+            .orElse(DefaultUpdateQuality.of())
             .run(item);
 
     }
