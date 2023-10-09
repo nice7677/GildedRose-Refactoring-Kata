@@ -160,4 +160,28 @@ class GildedRoseTest {
 
     }
 
+    @Test
+    @DisplayName("판매하는 나머지 일수가 없어지면 Conjured의 Quality 값은 SellIn 값이 떨어질수록 2배로 감소한다.")
+    void conjured() {
+
+        Item[] items = new Item[]{new Item("Conjured", 1, 20)};
+
+        assertEquals(items[0].sellIn, 1);
+        assertEquals(items[0].quality, 20);
+
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(items[0].sellIn, 0);
+        assertEquals(items[0].quality, 18);
+
+        app.updateQuality();
+
+        assertEquals(items[0].sellIn, -1);
+        assertEquals(items[0].quality, 14);
+
+    }
+
+
 }
