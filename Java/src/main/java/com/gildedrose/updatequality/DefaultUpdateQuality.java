@@ -4,7 +4,7 @@ import com.gildedrose.Item;
 
 public class DefaultUpdateQuality implements UpdateQuality {
 
-    private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+    private static final String CONJURED = "Conjured";
 
     @Override
     public boolean supportTarget(String itemName) {
@@ -15,17 +15,27 @@ public class DefaultUpdateQuality implements UpdateQuality {
     public void run(Item item) {
 
         if (item.quality > 0 && !item.name.equals(SULFURAS)) {
-            item.quality = item.quality - 1;
+            updateQuality(item);
         }
 
         sulfurasUpdateQuality(item);
 
         if (item.sellIn < 0 && item.quality > 0 && !item.name.equals(SULFURAS)) {
-
-            item.quality = item.quality - 1;
-
+            updateQuality(item);
         }
 
+    }
+
+    private void updateQuality(Item item) {
+        item.quality = item.quality - getMinusQualityValue(item.name);
+    }
+
+    private int getMinusQualityValue(String itemName) {
+        int defaultQualityValue = 1;
+        if (itemName.equals(CONJURED)) {
+            return defaultQualityValue * 2;
+        }
+        return defaultQualityValue;
     }
 
 }
