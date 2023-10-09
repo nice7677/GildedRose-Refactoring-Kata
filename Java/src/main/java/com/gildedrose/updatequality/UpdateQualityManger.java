@@ -7,8 +7,10 @@ public class UpdateQualityManger {
 
     private static final Set<UpdateQuality> updateQualities = new HashSet<>();
 
-    public void addUpdateQuality(UpdateQuality updateQuality) {
-        updateQualities.add(updateQuality);
+    static {
+        updateQualities.add(new AgedBireUpdateQuality());
+        updateQualities.add(new BackstagePassesUpdateQuality());
+        updateQualities.add(new DefaultUpdateQuality());
     }
 
     public Set<UpdateQuality> getUpdateQualities() {

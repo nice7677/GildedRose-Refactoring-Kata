@@ -2,7 +2,7 @@ package com.gildedrose.updatequality;
 
 import com.gildedrose.Item;
 
-public class AgedBireUpdateQuality implements UpdateQuality {
+public class AgedBireUpdateQuality implements SpecialItemUpdateQuality {
 
     private static final String ITEM_NAME = "Aged Brie";
 
@@ -13,6 +13,13 @@ public class AgedBireUpdateQuality implements UpdateQuality {
 
     @Override
     public void run(Item item) {
+
+        commonUpdateQuality(item);
+        sulfurasUpdateQuality(item);
+
+        if (item.sellIn < 0 && isQualityLessThan50(item.quality)) {
+            item.quality = item.quality + 1;
+        }
 
     }
 
