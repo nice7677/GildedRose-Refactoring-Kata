@@ -1,6 +1,20 @@
 package com.gildedrose;
 
+import com.gildedrose.updatequality.AgedBireUpdateQuality;
+import com.gildedrose.updatequality.BackstagePassesUpdateQuality;
+import com.gildedrose.updatequality.DefaultUpdateQuality;
+import com.gildedrose.updatequality.UpdateQualityManger;
+
 class GildedRose {
+
+    private static final UpdateQualityManger updateQualityManger = new UpdateQualityManger();
+
+    static {
+        updateQualityManger.addUpdateQuality(new AgedBireUpdateQuality());
+        updateQualityManger.addUpdateQuality(new BackstagePassesUpdateQuality());
+        updateQualityManger.addUpdateQuality(new DefaultUpdateQuality());
+    }
+
     Item[] items;
 
     public GildedRose(Item[] items) {
