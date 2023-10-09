@@ -22,18 +22,22 @@ public class BackstagePassesUpdateQuality implements SpecialItemUpdateQuality {
         sulfurasUpdateQuality(item);
 
         if (item.sellIn < 0) {
-            item.quality = item.quality - item.quality;
+            updateQuality(item, item.quality);
         }
 
     }
 
     private void updateBackstagePassesQuality(Item item) {
         if (item.sellIn < 11 && isQualityLessThan50(item.quality)) {
-            item.quality = item.quality + 1;
+            updateQuality(item, 1);
         }
         if (item.sellIn < 6 && isQualityLessThan50(item.quality)) {
-            item.quality = item.quality + 1;
+            updateQuality(item, 1);
         }
+    }
+
+    private void updateQuality(Item item, int value) {
+        item.quality = item.quality + value;
     }
 
 }
