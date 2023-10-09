@@ -91,4 +91,73 @@ class GildedRoseTest {
 
     }
 
+    @Test
+    @DisplayName("Quality 값은 50을 넘을 수 없다.")
+    void quality50() {
+
+        Item[] items = new Item[]{new Item("Aged Brie", 0, 50)};
+
+        assertEquals(items[0].sellIn, 0);
+        assertEquals(items[0].quality, 50);
+
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(items[0].sellIn, -1);
+        assertEquals(items[0].quality, 50);
+
+        app.updateQuality();
+
+        assertEquals(items[0].sellIn, -2);
+        assertEquals(items[0].quality, 50);
+
+    }
+
+    @Test
+    @DisplayName("Sulfuras의 Quality 값은 변하지 않는다.")
+    void sulfurasQuality() {
+
+        Item[] items = new Item[]{new Item("Sulfuras, Hand of Ragnaros", 0, 50)};
+
+        assertEquals(items[0].sellIn, 0);
+        assertEquals(items[0].quality, 50);
+
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(items[0].sellIn, 0);
+        assertEquals(items[0].quality, 50);
+
+        app.updateQuality();
+
+        assertEquals(items[0].sellIn, 0);
+        assertEquals(items[0].quality, 50);
+
+    }
+
+    @Test
+    @DisplayName("Backstage Passes의 Quality 값은 SellIn 값이 10이하면 2씩 증가한다. 5 이하면 3씩 증가한다.")
+    void backstagePassesQuality() {
+
+        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 6, 0)};
+
+        assertEquals(items[0].sellIn, 6);
+        assertEquals(items[0].quality, 0);
+
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(items[0].sellIn, 5);
+        assertEquals(items[0].quality, 2);
+
+        app.updateQuality();
+
+        assertEquals(items[0].sellIn, 4);
+        assertEquals(items[0].quality, 5);
+
+    }
+
 }
